@@ -1,8 +1,6 @@
-
 # Motorway UI Test
 
 Welcome to the Motorway UI technical test, focusing on user experience, HTML, CSS, a11y, and leveraging browser APIs.
-
 
 ## Set up
 
@@ -15,13 +13,13 @@ This repo is a Vite app with simple Express server which serves a JSON feed of c
 Afterward, the React app will be available at `http://localhost:5173/`, and the Express server at `http://localhost:8000/`.
 
 There are two endpoints available:
- * http://localhost:8000/api/tags - to return all tags in
- * http://localhost:8000/api/tags?tag=ferrari - to return matching tags
- * http://localhost:8000/api/cars - to return all cars
- * http://localhost:8000/api/cars?tag=ferrari - to return matching cars
 
+- http://localhost:8000/api/tags - to return all tags in
+- http://localhost:8000/api/tags?tag=ferrari - to return matching tags
+- http://localhost:8000/api/cars - to return all cars
+- http://localhost:8000/api/cars?tag=ferrari - to return matching cars
 
-### Prerequisites 
+### Prerequisites
 
 - Prepare a folder for the live coding challenge.
 - Minimum Node version: 18
@@ -31,12 +29,12 @@ There are two endpoints available:
 - Both the server and React app watch relevant files and hot reload on changes.
 - Feel free to modify or install necessary code. If installing packages that are wrappers for native browser APIs, please leave a comment explaining why.
 
-
 ## Tasks - Take home challenge (2 hours)
 
- We appreciate that your time is valuable and recommend you not spend more than 2 hours on these tasks. Focusing on one small thing well or a bigger scope as a proof of concept, both approaches are valid.
+We appreciate that your time is valuable and recommend you not spend more than 2 hours on these tasks. Focusing on one small thing well or a bigger scope as a proof of concept, both approaches are valid.
 
 ### 1. Realtime search
+
 We have an tags api endpoint at `http://localhost:8000/api/tags` which returns an array of all tags available in the format:
 
 ```
@@ -63,7 +61,9 @@ By adding a `tag` query the endpoint will return an array of matching tags `http
 ```
 
 #### Outcomes
+
 To have a type ahead search functionality like [Pinterest](https://www.pinterest.co.uk/ideas/) which can query the above API and return selectable results.
+
 - Display tags available in a form of dropdown
 - Allow available tags to be selected
 - Performant fast results
@@ -71,6 +71,7 @@ To have a type ahead search functionality like [Pinterest](https://www.pinterest
 - **Not exposing the whole dataset** would be beneficial
 
 ### 2. Realtime search results
+
 Once task one has been completed, when a user selects a tag, another call to `api/cars` endpoint needs to be made to display the result in some UI (similar to [Pinterest](https://www.pinterest.co.uk/search/pins/?q=red%20car&rs=typed)) The more interesting or unique the better, examples could be but not limited too a11y, animation, image optimization, semantic markup, schemas, WebGL. _Again, we appreciate that all of them can't be achieved in two hours and we don't expect to you to cover most of them, let alone all of them._
 
 We have cars api endpoint available at `http://localhost:8000/api/cars` which returns array of all cars available in following format:
@@ -141,10 +142,9 @@ By adding a `tag` query the endpoint will return an array of matching cars `http
 
 #### Images
 
-Use `.jpg` (JPEG) or `.webp` (WebP) file extensions when referencing images. 
+Use `.jpg` (JPEG) or `.webp` (WebP) file extensions when referencing images.
 
 The image links from the responses have excluded file extension. This design is intentional to offer flexibility in the choice of image formats while maintaining a consistent and clean URL structure.
-
 
 ## Designs
 

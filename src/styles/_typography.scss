@@ -1,8 +1,7 @@
-
 $font-color: #fff;
 $font-size: 16px;
 
-$font-size: $font-size!default;
+$font-size: $font-size !default;
 $font-weight-normal: normal;
 $font-weight-semi: 600;
 $font-weight-bold: bold;
@@ -33,7 +32,7 @@ $font-family: 'NewTransport', helvetica, arial, sans-serif;
 
 @mixin heading2 {
   @include semibold-font-base;
-	
+
   font-size: 24px;
   font-weight: $font-weight-normal;
   line-height: 32px;

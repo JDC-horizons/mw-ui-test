@@ -1,9 +1,9 @@
 @use './core';
 
-$default-font-size: core.$core-font-size!default;
+$default-font-size: core.$core-font-size !default;
 
 @use './typography' with (
-  $font-size: $default-font-size,
+  $font-size: $default-font-size
 );
 
 * {
