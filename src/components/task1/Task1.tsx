@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-const API_URL = 'http://localhost:8000/api/tags';
+const apiUrl = 'http://localhost:8000/api/tags';
+const carsApiUrl = 'http://localhost:8000/api/cars';
 
 const Task1: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [tags, setTags] = useState<string[]>([]);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [fetchedCars, setFetchedCars] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,7 +20,7 @@ const Task1: React.FC = () => {
     setError(null);
 
     try {
-      const response = await fetch(`${API_URL}?tag=${query}`);
+      const response = await fetch(`${apiUrl}?tag=${query}`);
       if (!response.ok) throw new Error('Failed to fetch tags');
       const data = await response.json();
       setTags(data);
@@ -37,19 +39,30 @@ const Task1: React.FC = () => {
     return () => clearTimeout(debounceTimeout);
   }, [searchTerm]);
 
+  const fetchCars = async (tag: string) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(`${carsApiUrl}?tag=${tag}`);
+      if (!response.ok) throw new Error('Failed to fetch cars');
+      const data = await response.json();
+      setFetchedCars(data);
+    } catch (err) {
+      setError('Failed to load cars');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
   const handleTagSelect = (tag: string) => {
-    setSelectedTags((prevSelected) => {
-      if (!prevSelected.includes(tag)) {
-        return [...prevSelected, tag];
-      }
-      return prevSelected;
-    });
+    setSelectedTag(tag);
     setSearchTerm('');
     setTags([]);
+    fetchCars(tag);
   };
 
   return (
@@ -76,18 +89,27 @@ const Task1: React.FC = () => {
         </ul>
       )}
 
-      {selectedTags.length > 0 && (
-        <div style={{ display: 'flex', flexDirection: 'column' }} className="selected-tags">
-          {selectedTags.map((tag, index) => (
-            <span key={index} className="search-tag">
-              {tag}
-              <button
-                style={{ marginLeft: '6px' }}
-                onClick={() => setSelectedTags(selectedTags.filter((t) => t !== tag))}
-              >
-                ✖
-              </button>
-            </span>
+      {selectedTag && (
+        <div className="selected-tag">
+          <span className="search-tag">
+            {selectedTag}
+            <button
+              style={{ marginLeft: '8px' }}
+              onClick={() => {
+                setSelectedTag(null);
+                setFetchedCars([]);
+              }}
+            >
+              ✖
+            </button>
+          </span>
+        </div>
+      )}
+
+      {fetchedCars.length > 0 && (
+        <div className="cars-display">
+          {fetchedCars.map((car, index) => (
+            <img key={index} className="car-image" src={car.url} alt={`Car ${index}`} />
           ))}
         </div>
       )}
